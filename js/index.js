@@ -25,20 +25,14 @@ const runGame = () => {
 
   window['TANK'] = tank;
 
-  // const pointerdown = ({ data }) => {
-  //   console.log(data);
-
-  //   const positions = data.getLocalPosition(app.stage);
-  //   app.stage.addChild(
-  //     new Graphics()
-  //       .beginFill(0x8ff559, 1)
-  //       .drawCircle(positions.x, positions.y, 8)
-  //   );
-  // };
-
   const tweenManager = new TweenManager(app.ticker);
 
-  const moveTank = () => {};
+  const moveTank = ({ data }) => {
+    const distanceToCenter = data.getLocalPosition(app.stage);
+    const distanceToTank = data.getLocalPosition(tank.view);
+    const angle = Math.atan2(distanceToTank.y, distanceToTank.x);
+    console.log(angle);
+  };
 
   app.stage.on('pointerdown', moveTank, undefined);
   app.stage.interactive = true;
