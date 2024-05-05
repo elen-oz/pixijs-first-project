@@ -37,10 +37,18 @@ const runGame = () => {
       callAmount -= 1;
 
       if (callAmount <= 0) {
-        tweenManager.createTween(tank, 3000, {
-          x: distanceToCenter.x,
-          y: distanceToCenter.y,
-        });
+        tweenManager.createTween(
+          tank,
+          3000,
+          {
+            x: distanceToCenter.x,
+            y: distanceToCenter.y,
+          },
+          {
+            onStart: () => tank.startTracks(),
+            onFinish: () => tank.stopTracks(),
+          }
+        );
       }
     };
 
@@ -57,7 +65,13 @@ const runGame = () => {
       2000,
       { bodyDirection: angle },
       {
-        onFinish: () => move(),
+        onStart: () => {
+          tank.startTracks();
+        },
+        onFinish: () => {
+          tank.stopTracks();
+          move();
+        },
       }
     );
   };
