@@ -31,7 +31,35 @@ const runGame = () => {
     const distanceToCenter = data.getLocalPosition(app.stage);
     const distanceToTank = data.getLocalPosition(tank.view);
     const angle = Math.atan2(distanceToTank.y, distanceToTank.x);
-    console.log(angle);
+
+    let callAmount = 2;
+    const move = () => {
+      callAmount -= 1;
+
+      if (callAmount <= 0) {
+        tweenManager.createTween(tank, 3000, {
+          x: distanceToCenter.x,
+          y: distanceToCenter.y,
+        });
+      }
+    };
+
+    tweenManager.createTween(
+      tank,
+      1000,
+      { towerDirection: angle },
+      {
+        onFinish: () => move(),
+      }
+    );
+    tweenManager.createTween(
+      tank,
+      2000,
+      { bodyDirection: angle },
+      {
+        onFinish: () => move(),
+      }
+    );
   };
 
   app.stage.on('pointerdown', moveTank, undefined);
