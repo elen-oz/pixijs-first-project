@@ -13,6 +13,17 @@ export const createAnimatedSprite = (
   return animatedSprite;
 };
 
+export const createSprite = (
+  textureName,
+  position = { x: 0, y: 0 },
+  anchor = { x: 0.5, y: 0.5 }
+) => {
+  const sprite = new Sprite(Texture.from(textureName));
+  sprite.position.copyFrom(position);
+  sprite.anchor.copyFrom(anchor);
+  return sprite;
+};
+
 export class Tank {
   constructor() {
     this._view = new Container();
@@ -35,17 +46,8 @@ export class Tank {
 
     this._view.addChild(this._hull);
 
-    const gunLeft = new Sprite(Texture.from('HeavyGunB'));
-    gunLeft.position.set(140, -27);
-    gunLeft.anchor.set(0.5);
-
-    this._view.addChild(gunLeft);
-
-    const gunRight = new Sprite(Texture.from('HeavyGunB'));
-    gunRight.position.set(160, 29);
-    gunRight.anchor.set(0.5);
-
-    this._view.addChild(gunRight);
+    this._view.addChild(createSprite('HeavyGunB', { x: 140, y: -27 }));
+    this._view.addChild(createSprite('HeavyGunB', { x: 160, y: 29 }));
   }
 
   get view() {
