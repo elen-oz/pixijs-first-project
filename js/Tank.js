@@ -46,8 +46,19 @@ export class Tank {
 
     this._view.addChild(this._hull);
 
-    this._view.addChild(createSprite('HeavyGunB', { x: 140, y: -27 }));
-    this._view.addChild(createSprite('HeavyGunB', { x: 160, y: 29 }));
+    this._towerContainer = new Container();
+    this._view.addChild(this._towerContainer);
+
+    this._towerContainer.addChild(
+      createSprite('HeavyGunB', { x: 140, y: -27 })
+    );
+    this._towerContainer.addChild(createSprite('HeavyGunB', { x: 160, y: 29 }));
+
+    this._towerContainer.addChild(
+      createSprite('GunConnectorD', { x: 80, y: 0 })
+    );
+
+    this._towerContainer.addChild(createSprite('HeavyTowerB'));
   }
 
   get view() {
