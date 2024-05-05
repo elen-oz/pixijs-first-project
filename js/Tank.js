@@ -28,6 +28,9 @@ export class Tank {
   constructor() {
     this._view = new Container();
 
+    this._bodyContainer = new Container();
+    this._view.addChild(this._bodyContainer);
+
     this._tracksLeft = createAnimatedSprite(['TrackCFrame1', 'TrackCFrame2'], {
       x: 0,
       y: -80,
@@ -39,12 +42,12 @@ export class Tank {
     this._tracksLeft.animatedSpeedm = 0.25;
     this._tracksRight.animatedSpeedm = 0.25;
 
-    this._view.addChild(this._tracksLeft, this._tracksRight);
+    this._bodyContainer.addChild(this._tracksLeft, this._tracksRight);
 
     this._hull = new Sprite(Texture.from('HeavyHullB'));
     this._hull.anchor.set(0.5);
 
-    this._view.addChild(this._hull);
+    this._bodyContainer.addChild(this._hull);
 
     this._towerContainer = new Container();
     this._view.addChild(this._towerContainer);
@@ -63,5 +66,23 @@ export class Tank {
 
   get view() {
     return this._view;
+  }
+
+  rotateTowerBy(angle) {
+    this._towerContainer.rotation += angle;
+  }
+
+  rotateBodyBy(angle) {
+    this._bodyContainer.rotation += angle;
+  }
+
+  startTracks() {
+    this._tracksLeft.play();
+    this._tracksRight.play();
+  }
+
+  stopTracks() {
+    this._tracksLeft.stop();
+    this._tracksRight.stop();
   }
 }
