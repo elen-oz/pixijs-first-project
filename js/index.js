@@ -10,7 +10,16 @@ const app = new Application({
 });
 
 const runGame = () => {
-  console.log('LOADED!');
+  const marker = new Graphics();
+  marker.beginFill(0xff0000, 1);
+  marker.drawCircle(0, 0, 5);
+  marker.endFill();
+
+  app.stage.addChild(marker);
+
+  // window['RECTANGLE'] = marker;
+
+  app.stage.position.set(800 / 2, 800 / 2);
 };
 
 assetsMap.sprites.forEach((value) => app.loader.add(value));
