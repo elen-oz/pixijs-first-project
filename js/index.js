@@ -1,6 +1,7 @@
 import { Application, Graphics, Rectangle } from './pixi.mjs';
 import { assetsMap } from './assetsMap.js';
 import { Tank } from './Tank.js';
+import { TweenManager, Tween } from './Tween.js';
 
 // Create the application
 const app = new Application({
@@ -24,17 +25,22 @@ const runGame = () => {
 
   window['TANK'] = tank;
 
-  const pointerdown = ({ data }) => {
-    console.log(data);
+  // const pointerdown = ({ data }) => {
+  //   console.log(data);
 
-    const positions = data.getLocalPosition(app.stage);
-    app.stage.addChild(
-      new Graphics()
-        .beginFill(0x8ff559, 1)
-        .drawCircle(positions.x, positions.y, 8)
-    );
-  };
-  app.stage.on('pointerdown', pointerdown, undefined);
+  //   const positions = data.getLocalPosition(app.stage);
+  //   app.stage.addChild(
+  //     new Graphics()
+  //       .beginFill(0x8ff559, 1)
+  //       .drawCircle(positions.x, positions.y, 8)
+  //   );
+  // };
+
+  const tweenManager = new TweenManager(app.ticker);
+
+  const moveTank = () => {};
+
+  app.stage.on('pointerdown', moveTank, undefined);
   app.stage.interactive = true;
   app.stage.interactiveChildren = false;
   app.stage.hitArea = new Rectangle(-400, -400, 800, 800);
