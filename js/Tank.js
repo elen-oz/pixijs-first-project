@@ -1,4 +1,4 @@
-import { Container, AnimatedSprite, Texture } from './pixi.mjs';
+import { Container, AnimatedSprite, Texture, Sprite } from './pixi.mjs';
 
 export const createAnimatedSprite = (
   textureNames,
@@ -29,6 +29,23 @@ export class Tank {
     this._tracksRight.animatedSpeedm = 0.25;
 
     this._view.addChild(this._tracksLeft, this._tracksRight);
+
+    this._hull = new Sprite(Texture.from('HeavyHullB'));
+    this._hull.anchor.set(0.5);
+
+    this._view.addChild(this._hull);
+
+    const gunLeft = new Sprite(Texture.from('HeavyGunB'));
+    gunLeft.position.set(140, -27);
+    gunLeft.anchor.set(0.5);
+
+    this._view.addChild(gunLeft);
+
+    const gunRight = new Sprite(Texture.from('HeavyGunB'));
+    gunRight.position.set(160, 29);
+    gunRight.anchor.set(0.5);
+
+    this._view.addChild(gunRight);
   }
 
   get view() {
